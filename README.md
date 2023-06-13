@@ -87,7 +87,7 @@ El programa al ejecutarse se ve así:
 ![image](https://github.com/Artuu1999/Reto-13-Diccionarios/assets/124615034/09d008b1-a76f-49d4-9c17-80244bbc819f)
 
 ## Ejemplo No. 3
-Dado el JSON:
+Procesar el siguiente archivo JSON y diseñar un código que al ejecutarse solicite el ingreso de un deporte y un rango de edad, y así mismo imprima las personas que práctican el deporte ingresado y las personas que se encuentran dentro del rango de edad ingresado:
 ```JSON
 {
 	"jadiazcoronado":{
@@ -106,45 +106,57 @@ Dado el JSON:
 	}
 }
 ```
- Cree un programa que lea de un archivo con dicho JSON y: 
- - Imprima los nombres completos (nombre y apellidos) de las personas que practican el deporte ingresado por el usuario.
- - Imprima los nombres completos (nombre y apellidos) de las personas que esten en un rango de edades dado por el usuario.
-El código solución es el siguiente:
+La solución al problema planteado es el siguiente:
 ```sh
+# Se importa json
 import json
 
-def Json(archivo):
+#Definir una función para determinar las personas que práctican determinado deporte
+def NombresDeporte(data, deporte):
+    nombresCompletos = [] #Crear una lista vacía en la que se agregaran los nombres completos
+    for usuario, info in data.items(): #Ciclo for para iterar sobre  los elementos del archivo
+        if deporte in info['deportes']: #Condicinal que mira si el deporte ingresado está en el archivo
+            nombres = info['nombres'] #Se obtiene los nombres si el condicional se cumple
+            apellidos = info['apellidos'] #Se obtienen los apellidos
+            nombre= f"{nombres} {apellidos}" #Concatena los nombre y apellidos obtenidos anteriormente
+            nombresCompletos.append(nombre) #Se agrega a la lista vacía los nombres y apellidos encontrados
+    return nombresCompletos #Se retorna la función definida
+
+#Definir una función para determinar las personas se encuentran en determinado rango de edad
+def NombresRangoEdades(data, edadMinima, edadMaxima):
+    nombreRango = [] #Crear una lista vacía en la que se agregaran los nombres completos
+    for usuario, info in data.items(): #Ciclo for para iterar sobre  los elementos del archivo
+        edad = info['edad'] #Obtiene la edad de las personas del diccionario
+        #Condicinal para verificar que la edad se encuentre dentro del rango de edad ingresado por el usuario
+        if edadMinima <= edad <= edadMaxima:
+            nombres = info['nombres'] #Si se encuentra, se obtiene los nombres de la persona
+            apellidos = info['apellidos'] #Se obtiene los apellidos de la persona
+            nombreRangoEdad = f"{nombres} {apellidos}" #Concatena los nombre y apellidos obtenidos anteriormente
+            nombreRango.append(nombreRangoEdad) #Se agrega a la lista vacía los nombres y apellidos encontrados
+    return nombreRango #Se retorna la función definida
+
+# Llamar las funciones e imprimir el resultado
+if __name__ == "__main__":
+    #Se llama el archivo, se abre y se lee
+    archivo = 'archivoJson.json'
     with open(archivo, 'r') as file:
         data = json.load(file)
-    return data
-def NombresDeporte(data, deporte):
-    for usuario, info in data.items():
-        if deporte in info['deportes']:
-            nombres = info['nombres']
-            apellidos = info['apellidos']
-            nombreCompleto = f"{nombres} {apellidos}"
-            print(nombreCompleto)
-def NombresRangoEdades(data, edadMin, edadMax):
-    for usuario, info in data.items():
-        edad = info['edad']
-        if edadMin <= edad <= edadMax:
-            nombres = info['nombres']
-            apellidos = info['apellidos']
-            nombreCompleto = f"{nombres} {apellidos}"
-            print(nombreCompleto)
-
-ArchivoJson = 'datos.json'
-data = Json(archivoJson)
-
-deporteIngresado = input("Ingrese el nombre del deporte : ")
-print("Nombres de personas que practican", deporteIngresado)
-NombresDeporte(data, deporteIngresado)
-
-edadMinima = int(input("Ingrese la edad mínima: "))
-edadMaxima = int(input("Ingrese la edad máxima: "))
-print("Nombres de personas en el rango es de ", edadMinima, "a", edadMaxima)
-NombresRangoEdades(data, edadMinima, edadMaxima)
+    #Se solicita el ingreso del deporte que se desea averiguar
+    deporteIngresado = input("Ingrese el nombre del deporte (Con buena ortografía): ")
+    print("Nombres de personas que practican "+str(deporteIngresado)+": ")
+    nombresCompletos = NombresDeporte(data, deporteIngresado) #Se llama la función definida
+    print(nombresCompletos) #Imprimimos el resultado
+    # Se solicita el ingreso del rango de edad que se desea averiguar
+    edadMinima = int(input("Ingrese la edad mínima: "))
+    edadMaxima = int(input("Ingrese la edad máxima: "))
+    print("Personas dentro del rango de edad de "+str(edadMinima)+" años a "+str(edadMaxima)+" años: ")
+    nombreRango = NombresRangoEdades(data, edadMinima, edadMaxima) #Se llama la función definida
+    print(nombreRango) #Imprimimos el resultado
 ```
+El código al ejecutarse se ve de la siguiente manera:
+
+![image](https://github.com/Artuu1999/Reto-13-Diccionarios/assets/124615034/d2c6eb85-a3e4-4494-8435-19179ca8011e)
+
 
 ## Ejemplo No. 4
 El siguiente código contiene un JSON con el pronostivo detallado del clima para 8 días:
