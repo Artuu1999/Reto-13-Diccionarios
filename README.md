@@ -1,31 +1,42 @@
 # Reto #13 Diccionarios
 Espero que se encuentren excelente estimados lectores, en el presente repositorio haremos varios ejemplos de código en Python utilizando lo aprendido acerca de los diccionarios dentro de nuestra clase de programación de computadores.
 ## Ejemplo No. 1
-Desarrollar un algoritmo que imprima de manera ascendente los valores (todos del mismo tipo) de un diccionario.
+Crear un código que permita ingresar un diccionario y posteriormente imprimir de manera ascendente los valores de dicho diccionario
 El código solución es el siguiente:
 ```sh
+#Definir una función para crear un diccionario ingresado por el usuario
 def crearDiccionario():
-    diccionario = {}
-    tamaño = int(input("Ingrese el tamaño del diccionario: "))
-    for i in range(tamaño):
-        clave = input("Ingrese la clave: ")
+    diccionario = {} #Se crea un diccionario vacio
+    tamaño = int(input("Ingrese el tamaño del diccionario: ")) #Se sokicita el ingreso de la cantidad de claves
+    for i in range(tamaño): #Ciclo for para cada indice
+        #Se solicita que se ingrese cada clave y su respectivo valor
+        clave = input("Ingrese la clave: ") 
         valor = float(input("Ingrese el valor (Números): "))
-        diccionario[clave] = valor
-    return diccionario
+        diccionario[clave] = valor #Agregar el valor y la clave al diccionario
+    return diccionario #Se retorna la función definida
 
+#Definir función para ordenar de manera ascendente el diccionario
 def ordenAscendente(diccionario):
+    #Se utiliza el método sorted para ordenar de forma ascendente el diccionario ingresado
     diccionarioOrden = sorted(diccionario.items(), key=lambda x: x[1])
-    return diccionarioOrden
+    return diccionarioOrden #Se retorna la función definida
 
+#Llamar las funciones e imprimir el resultado   
 if __name__ == "__main__":
+    #Se llaman las funciones definidas anteriormente
     diccionario = crearDiccionario()
     diccionarioOrden = ordenAscendente(diccionario)
+    #Se imprime el diccionario ingresado
     print("El diccionario ingresado fue: ")
     print(diccionario)
+    #Se imprime el diccionario ingresado con sus valores ordenados de manera ascendente
     print("El diccionario ingresado en orden ascendente es el siguiente: ")
     print(diccionarioOrden)
-
 ```
+El programa al correrlo se ve de la siguiente manera:
+
+![image](https://github.com/Artuu1999/Reto-13-Diccionarios/assets/124615034/ad9cfc9b-a63f-4746-b058-0e62ebf27848)
+
 
 ## Ejemplo No. 2
 Desarrollar una función que reciba dos diccionarios como parámetros y los mezcle, es decir, que se construya un nuevo diccionario con las llaves de los dos diccionarios; si hay una clave repetida en ambos diccionarios, se debe asignar el valor que tenga la clave en el primer diccionario.
