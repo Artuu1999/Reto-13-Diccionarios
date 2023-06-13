@@ -39,7 +39,7 @@ El programa al correrlo se ve de la siguiente manera:
 
 
 ## Ejemplo No. 2
-Desarrollar una función que reciba dos diccionarios como parámetros y los mezcle, es decir, que se construya un nuevo diccionario con las llaves de los dos diccionarios; si hay una clave repetida en ambos diccionarios, se debe asignar el valor que tenga la clave en el primer diccionario.
+Crear un algoritmo que permita al usuario ingresar dos diccionarios y que posteriormente mezcle los dos diccionarios ingresados por el usuario en otro diccionario.
 El código solución es el siguiente:
 ```sh
 #Definir una función para crear el primer diccionario ingresado por el usuario
@@ -174,69 +174,56 @@ for x in range(numereCord):
 ```
 
 ## Ejemplo No. 5
-A través de un programa conectese a al menos 3 [API's ](https://apipheny.io/free-api/), obtenga el JSON, imprimalo y extraiga los pares de llave : valor.
-Primera  API:
+Diseñar un código, el cual se conecte a 3 [API's ](https://apipheny.io/free-api/), y se extraigan determinados valores de dichos archivos JSON.
+A continuación la solución al ejemplo:
 ```sh
-import json
+# Se instala requests y se importa junto con json
 import requests
+import json
 
-url = 'https://api.agify.io'
+# Definir función para obtener la nacionalidad del nombre a partir de la API
+def informacionNacionalidad(nombre: str):
+    url = 'https://api.nationalize.io'  # Definir la API en la variable URL
+    clave = {'name': nombre}  # Se solicita el parámetro de nombre, que es en el que se basa la API
+    valor = requests.get(url, params=clave)  # Se obtiene la llave y el valor
+    print(valor.url)  # Se imprime la URL
+    data = json.loads(valor.text)  # Convierte la respuesta de json a formato python
+    return data  # Se retorna la función definida
 
-def obtenerInformacionPorNombre(nombre: str):
-    params = {'name': nombre}
-    peticion = requests.get(url, params=params)
-    print(peticion.url)
-    print(peticion.status_code)
+# Definir función para obtener información del nombre a partir de la API
+def informacionNombre(nombre: str):
+    url = 'https://api.agify.io'  # Definir la API en la variable URL
+    clave = {'name': nombre}  # Se solicita el parámetro de nombre, que es en el que se basa la API
+    valor = requests.get(url, params=clave)  # Se obtiene la llave y el valor
+    print(valor.url)  # Se imprime la URL
+    data = json.loads(valor.text)  # Convierte la respuesta de json a formato python
+    return data  # Se retorna la función definida
 
-    data = json.loads(peticion.text)
-    return data
+# Definir función para obtener una imagen de un perro a partir de la API
+def imagenPerro():
+    url = 'https://dog.ceo/api/breeds/image/random'  # Definir la API en la variable URL
+    valor = requests.get(url)  # Se obtiene la llave y el valor
+    print(valor.url)  # Se imprime la URL
+    data = json.loads(valor.text)  # Convierte la respuesta de json a formato python
+    imagen = data['message']  # Se extrae el link de la imagen del diccionario de la API data
+    return imagen  # Se retorna la función definida
 
+# Llamar las funciones e imprimir el resultado de cada diccionario de la API
 if __name__ == "__main__":
-    nombre = input("Ingrese la llave: ")
-    respuesta = obtenerInformacionPorNombre(nombre)
-    print("Información para el nombre:", nombre)
+    nombre = input("Ingrese un nombre: ")
+    respuesta = informacionNacionalidad(nombre)
+    print("Información de la nacionalidad del nombre " + str(nombre) + ": ")
     print(json.dumps(respuesta, indent=2))
-```
-Segunda  API:
-```sh
-import requests
-import json
-
-url = 'https://dog.ceo/api/breeds/image/random'
-
-def obtenerImagenPerro():
-    peticion = requests.get(url)
-    print(peticion.url)
-    print(peticion.status_code)
-
-    data = json.loads(peticion.text)
-    imagen = data['message']
-    return imagen
-
-if __name__ == "__main__":
-    imagen_perro = obtenerImagenPerro()
-    print("Imagen aleatoria de perro:")
-    print(imagen_perro)
-```
-Tercera  API:
-```sh
-import requests
-import json
-
-url = 'https://api.nationalize.io'
-
-def obtenerInformacionNacionalidad(nombre: str):
-    params = {'name': nombre}
-    peticion = requests.get(url, params=params)
-    print(peticion.url)
-    print(peticion.status_code)
-
-    data = json.loads(peticion.text)
-    return data
-
-if __name__ == "__main__":
-    nombre = input("Ingrese el nombre: ")
-    respuesta = obtenerInformacionNacionalidad(nombre)
-    print("Información de nacionalidad para el nombre:", nombre)
+    respuesta = informacionNombre(nombre)
+    print("Información general del nombre " + str(nombre) + ": ")
     print(json.dumps(respuesta, indent=2))
+    imagen = imagenPerro()
+    print("Imagen de perro: ")
+    print(imagen)
 ```
+El código funcionando se obseva de la siguiente manera:
+
+![image](https://github.com/Artuu1999/Reto-13-Diccionarios/assets/124615034/db4927be-bc74-452d-a054-f421b6991fc4)
+
+
+
