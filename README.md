@@ -42,44 +42,49 @@ El programa al correrlo se ve de la siguiente manera:
 Desarrollar una función que reciba dos diccionarios como parámetros y los mezcle, es decir, que se construya un nuevo diccionario con las llaves de los dos diccionarios; si hay una clave repetida en ambos diccionarios, se debe asignar el valor que tenga la clave en el primer diccionario.
 El código solución es el siguiente:
 ```sh
-def crear_diccionario1():
-    diccionario1 = {}
-    tamaño = int(input("Ingrese el tamaño del diccionario 1: "))
-    for i in range(tamaño):
-        clave = input("Ingrese la clave: ")
-        valor = input("Ingrese el valor: ")
-        diccionario1[clave] = valor
-    return diccionario1
+#Definir una función para crear el primer diccionario ingresado por el usuario
+def crearDiccionario1():
+    diccionario1 = {} #Se crea un diccionario vacio
+    tamaño = int(input("Ingrese el tamaño del diccionario 1: ")) #Se sokicita el ingreso de la cantidad de claves
+    for i in range(tamaño): #Ciclo for para cada indice
+        #Se solicita que se ingrese cada clave y su respectivo valor
+        clave = input("Ingrese la clave: ") 
+        valor = (input("Ingrese el valor: "))
+        diccionario1[clave] = valor #Agregar el valor y la clave al diccionario
+    return diccionario1 #Se retorna la función definida
 
-def crear_diccionario2():
-    diccionario2 = {}
-    tamaño = int(input("Ingrese el tamaño del diccionario 2: "))
-    for i in range(tamaño):
-        clave = input("Ingrese la clave: ")
-        valor = input("Ingrese el valor: ")
-        diccionario2[clave] = valor
-    return diccionario2
+#Definir una función para crear el segundo diccionario ingresado por el usuario
+def crearDiccionario2():
+    diccionario2 = {} #Se crea un diccionario vacio
+    tamaño = int(input("Ingrese el tamaño del diccionario 2: ")) #Se sokicita el ingreso de la cantidad de claves
+    for i in range(tamaño): #Ciclo for para cada indice
+        #Se solicita que se ingrese cada clave y su respectivo valor
+        clave = input("Ingrese la clave: ") 
+        valor = (input("Ingrese el valor: "))
+        diccionario2[clave] = valor #Agregar el valor y la clave al diccionario
+    return diccionario2 #Se retorna la función definida
 
-def mezclar_diccionarios(diccionario1, diccionario2):
-    nuevo_diccionario = diccionario1.copy()
-    nuevo_diccionario.update(diccionario2)
-    return nuevo_diccionario
+#Definir otra función para unir los diccionarios ingresados anteriormente
+def mezclarDiccionarios(diccionario1, diccionario2):
+    diccionarioCombinado = diccionario1.copy() #Realizar una copia del primer diccioario y asignarlo
+    diccionarioCombinado.update(diccionario2) #Unir el segundo diccionario a la copia del primero
+    return diccionarioCombinado #Se retorna la función definida
 
+#Llamar las funciones e imprimir el resultado de cada diccionario y la unión de estos
 if __name__ == "__main__":
     print("Primer diccionario:")
-    diccionario_1 = crear_diccionario1()
-    print(diccionario_1)
-
+    diccionario1 = crearDiccionario1()
+    print(diccionario1)
     print("Segundo diccionario:")
-    diccionario_2 = crear_diccionario2()
-    print(diccionario_2)
-
-    diccionario_mezclado = mezclar_diccionarios(diccionario_1, diccionario_2)
-
+    diccionario2 = crearDiccionario2()
+    print(diccionario2)
+    diccionarioCombinado = mezclarDiccionarios(diccionario1, diccionario2)
     print("Diccionario mezclado:")
-    print(diccionario_mezclado)
-
+    print(diccionarioCombinado)
 ```
+El programa al ejecutarse se ve así:
+
+![image](https://github.com/Artuu1999/Reto-13-Diccionarios/assets/124615034/09d008b1-a76f-49d4-9c17-80244bbc819f)
 
 ## Ejemplo No. 3
 Dado el JSON:
